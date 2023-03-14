@@ -31,7 +31,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setRoles([$request->get('role')]);
+//            $user->setRoles([$request->get('role')]);
+            $user->setRoles(array($request->get('role')));
+
 //            $user->setRoles(['ROLE_ADMIN']);
 //            dd($request->get('role'));
             $entityManager->persist($user);
