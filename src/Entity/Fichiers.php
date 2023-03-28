@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FichierClientRepository::class)]
-class FichierClient
+class Fichiers
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,7 +28,7 @@ class FichierClient
     #[ORM\ManyToOne(inversedBy: 'fichierClients')]
     private ?FichierDemande $id_fichier_demande = null;
 
-    #[ORM\ManyToMany(targetEntity: InfoClient::class, inversedBy: 'fichierClients')]
+    #[ORM\ManyToMany(targetEntity: Clients::class, inversedBy: 'fichierClients')]
     private Collection $id_info;
 
     public function __construct()
@@ -90,14 +90,14 @@ class FichierClient
     }
 
     /**
-     * @return Collection<int, InfoClient>
+     * @return Collection<int, Clients>
      */
     public function getIdInfo(): Collection
     {
         return $this->id_info;
     }
 
-    public function addIdInfo(InfoClient $idInfo): self
+    public function addIdInfo(Clients $idInfo): self
     {
         if (!$this->id_info->contains($idInfo)) {
             $this->id_info->add($idInfo);
@@ -106,7 +106,7 @@ class FichierClient
         return $this;
     }
 
-    public function removeIdInfo(InfoClient $idInfo): self
+    public function removeIdInfo(Clients $idInfo): self
     {
         $this->id_info->removeElement($idInfo);
 

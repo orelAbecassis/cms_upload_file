@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/user')]
+#[Route('admin/user')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
@@ -46,8 +46,10 @@ class UserController extends AbstractController
     public function show(User $user): Response
     {
         $user = $this->getUser();
+        //dd($user);
         return $this->render('user/show.html.twig', [
-            'user' => $user,
+            'user1' => $user,
+            'user' =>$user->getUserIdentifier()
 
 
         ]);
@@ -56,9 +58,10 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+        dd($user->getUserIdentifier());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -71,6 +74,7 @@ class UserController extends AbstractController
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'user' =>$user->getUserIdentifier()
         ]);
     }
 

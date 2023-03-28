@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InfoClientRepository::class)]
-class InfoClient
+class Clients
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,7 +45,7 @@ class InfoClient
     #[ORM\ManyToOne(inversedBy: 'infoClients')]
     private ?User $id_user = null;
 
-    #[ORM\ManyToMany(targetEntity: FichierClient::class, mappedBy: 'id_info')]
+    #[ORM\ManyToMany(targetEntity: Fichiers::class, mappedBy: 'id_info')]
     private Collection $fichierClients;
 
     public function __construct()
@@ -179,14 +179,14 @@ class InfoClient
     }
 
     /**
-     * @return Collection<int, FichierClient>
+     * @return Collection<int, Fichiers>
      */
     public function getFichierClients(): Collection
     {
         return $this->fichierClients;
     }
 
-    public function addFichierClient(FichierClient $fichierClient): self
+    public function addFichierClient(Fichiers $fichierClient): self
     {
         if (!$this->fichierClients->contains($fichierClient)) {
             $this->fichierClients->add($fichierClient);
@@ -196,7 +196,7 @@ class InfoClient
         return $this;
     }
 
-    public function removeFichierClient(FichierClient $fichierClient): self
+    public function removeFichierClient(Fichiers $fichierClient): self
     {
         if ($this->fichierClients->removeElement($fichierClient)) {
             $fichierClient->removeIdInfo($this);

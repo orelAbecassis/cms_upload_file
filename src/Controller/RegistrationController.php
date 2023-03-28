@@ -16,7 +16,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/admin/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -38,6 +38,8 @@ class RegistrationController extends AbstractController
 //            dd($request->get('role'));
             $entityManager->persist($user);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_index');
             // do anything else you need here, like send an email
 //
 //            return $userAuthenticator->authenticateUser(
@@ -49,7 +51,7 @@ class RegistrationController extends AbstractController
         $user= $this->getUser();
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-//            'user'=>$user->getUserIdentifier()
+            'user'=>$user->getUserIdentifier()
         ]);
     }
 }

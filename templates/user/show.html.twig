@@ -1,4 +1,4 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'home_admin/index.html.twig' %}
 
 {% block title %}User{% endblock %}
 
@@ -9,26 +9,26 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ user.id }}</td>
+                <td>{{ user1.id }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ user.email }}</td>
+                <td>{{ user1.email }}</td>
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user1.roles ? user1.roles|json_encode : '' }}</td>
             </tr>
             <tr>
                 <th>Password</th>
-                <td>{{ user.password }}</td>
+                <td>{{ user1.password }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', {'id': user1.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

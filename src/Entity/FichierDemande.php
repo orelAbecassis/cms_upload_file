@@ -21,7 +21,7 @@ class FichierDemande
     #[ORM\ManyToOne(inversedBy: 'fichierDemandes')]
     private ?User $id_user = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_fichier_demande', targetEntity: FichierClient::class)]
+    #[ORM\OneToMany(mappedBy: 'id_fichier_demande', targetEntity: Fichiers::class)]
     private Collection $fichierClients;
 
     public function __construct()
@@ -59,14 +59,14 @@ class FichierDemande
     }
 
     /**
-     * @return Collection<int, FichierClient>
+     * @return Collection<int, Fichiers>
      */
     public function getFichierClients(): Collection
     {
         return $this->fichierClients;
     }
 
-    public function addFichierClient(FichierClient $fichierClient): self
+    public function addFichierClient(Fichiers $fichierClient): self
     {
         if (!$this->fichierClients->contains($fichierClient)) {
             $this->fichierClients->add($fichierClient);
@@ -76,7 +76,7 @@ class FichierDemande
         return $this;
     }
 
-    public function removeFichierClient(FichierClient $fichierClient): self
+    public function removeFichierClient(Fichiers $fichierClient): self
     {
         if ($this->fichierClients->removeElement($fichierClient)) {
             // set the owning side to null (unless already changed)
